@@ -14,7 +14,7 @@ def run_home():
     df_area['상권_코드_명'] = df_area['상권_코드_명'].str.replace('?', '·')
 
     # ===== 홈 화면: 서울시 전체 개요 =====
-    st.header("📊 서울시 상권 현황")
+    st.header("서울시 상권 현황")
 
     # 최상단 핵심 지표
     col1, col2, col3, col4 = st.columns(4)
@@ -33,7 +33,7 @@ def run_home():
     col1, col2 = st.columns([1, 1])
 
     with col1:
-        st.subheader("📊 상권 구분별 현황")
+        st.subheader("상권 구분별 현황")
         type_stats = df_area.groupby('상권_구분_코드_명').agg({
             '상권_코드_명': 'count',
             '영역_면적': 'sum'
@@ -43,7 +43,7 @@ def run_home():
         st.dataframe(type_stats, use_container_width=True)
 
     with col2:
-        st.subheader("🥧 상권 구분 비율")
+        st.subheader("상권 구분 비율")
         fig = px.pie(df_area, names='상권_구분_코드_명',
                      title='상권 구분별 비율',
                      hole=0.4)
@@ -52,7 +52,7 @@ def run_home():
     st.divider()
 
     # 자치구별 TOP 10
-    st.subheader("🏆 자치구별 상권 수 TOP 10")
+    st.subheader("자치구별 상권 수 TOP 10")
     gu_count = df_area['자치구_코드_명'].value_counts().head(10).reset_index()
     gu_count.columns = ['자치구', '상권수']
 
@@ -66,7 +66,7 @@ def run_home():
     st.divider()
 
     # ===== 행정동별 지도 및 상세 분석 =====
-    st.header("🗺️ 행정동별 상권 분석")
+    st.header("행정동별 상권 분석")
 
     # 행정동별 상권 수 및 중심좌표 계산
     dong_summary = df_area.groupby('행정동_코드_명').agg({
@@ -80,7 +80,7 @@ def run_home():
 
 
     # 행정동 선택
-    choice_dong = st.selectbox('📍 행정동을 선택하세요', sorted(df_area['행정동_코드_명'].unique()))
+    choice_dong = st.selectbox('행정동을 선택하세요', sorted(df_area['행정동_코드_명'].unique()))
 
     # 선택된 행정동 필터링
     filtered_df = df_area[df_area['행정동_코드_명'] == choice_dong]
@@ -115,7 +115,7 @@ def run_home():
     st.divider()
 
     # === 선택된 행정동의 상권 지도 ===
-    st.write(f"#### 🗺️ {choice_dong} 상권 위치")
+    st.write(f"#### {choice_dong} 상권 위치")
 
     center_lat = filtered_df['위도'].mean()
     center_lon = filtered_df['경도'].mean()
@@ -144,13 +144,13 @@ def run_home():
     st.divider()
 
     # === 상권 상세 정보 ===
-    st.write(f"#### 📍 {choice_dong} 상권 목록")
+    st.write(f"#### {choice_dong} 상권 목록")
     display_df = filtered_df[['상권_코드_명', '상권_구분_코드_명', '영역_면적', '자치구_코드_명']].copy()
     display_df['영역_면적'] = display_df['영역_면적'].apply(lambda x: f"{x:,}㎡")
     st.dataframe(display_df, use_container_width=True)
 
     # === 면적 순위 ===
-    st.write("#### 📊 면적 순위")
+    st.write("#### 면적 순위")
     col1, col2 = st.columns(2)
 
     with col1:
@@ -168,7 +168,7 @@ def run_home():
     st.divider()
 
     # === 서울 전체와 비교 ===
-    st.write("#### 🔍 서울 전체와 비교")
+    st.write("#### 서울 전체와 비교")
     col1, col2, col3 = st.columns(3)
 
     avg_count_per_dong = len(df_area) / df_area['행정동_코드_명'].nunique()
@@ -194,7 +194,7 @@ def run_home():
     st.divider()
 
     # === 서울시 전체 행정동 비교 ===
-    st.write("#### 🏙️ 서울시 전체 행정동 비교")
+    st.write("#### 서울시 전체 행정동 비교")
 
     dong_comparison = df_area.groupby('행정동_코드_명').agg({
         '상권_코드_명': 'count',
@@ -211,7 +211,7 @@ def run_home():
     # 면적 포맷팅 (순위 계산 후)
     dong_comparison['총면적(㎡)'] = dong_comparison['총면적(㎡)'].apply(lambda x: f"{x:,}")
 
-    st.info(f"📍 **{choice_dong}**은 서울시 전체 {total_dongs}개 행정동 중 **{rank}위**입니다.")
+    st.info(f"**{choice_dong}**은 서울시 전체 {total_dongs}개 행정동 중 **{rank}위**입니다.")
 
     st.dataframe(dong_comparison, use_container_width=True)
 
