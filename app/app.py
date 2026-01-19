@@ -1,9 +1,13 @@
 import streamlit as st
 import os
 import base64
-from app_home import run_home
-from app_detail import run_detail
 from PIL import Image
+from app_home import run_home
+from components.sidebar import render_sidebar
+from app_overview import run_overview
+from app_environment import run_environment
+from app_forecast import run_forecast
+
 
 def main():
     # 최대 너비 및 사이드바 배경색 스타일
@@ -82,70 +86,21 @@ def main():
     
         <div class="title-container">
             <h1 class="title-text"><span style="filter: none; -webkit-text-fill-color: initial;">🗺️</span>장사잘될지도</h1>
-            <p class="subtitle-text">서울 상권 데이터 기반 입지 분석 플랫폼</p>
+            <p class="subtitle-text">서울 상권 데이터 기반 입지 분석 & 창업 의사결정 플랫폼</p>
         </div>
     """, unsafe_allow_html=True)
 
-    # 사이드바
-    with st.sidebar:
-        st.title("Menu")
-        menu = ['홈 화면', '상권 상세 분석', 'AI예측']
-        choice = st.selectbox('선택', menu)
-        
-        st.divider()
-
-        # 빈 공간 추가 (이미지를 더 아래로)
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-        st.write("")
-   
-
-        
-        
-        # 이미지를 셀렉트박스 아래로 이동
-        img_path = os.path.join("static", "images", "logo.png")
-        
-        if os.path.exists(img_path):
-            with open(img_path, "rb") as f:
-                data = base64.b64encode(f.read()).decode()
-            
-            st.markdown(f"""
-                <div style="text-align: center; margin: 20px 0;">
-                    <img src="data:image/png;base64,{data}" 
-                        style="width: 300px;
-                                border-radius: 15px; 
-                                margin-bottom: 10px;">
-                    <div style="font-size: 20px; 
-                                font-weight: bold; 
-                                color: #565a62;
-                                margin-top: 10px;">
-                        장사잘될지도
-                    </div>
-                </div>
-            """, unsafe_allow_html=True)
-
-    if choice == menu[0]:
+    # 사이드바 렌더링
+    choice, selected_gu, selected_dong, selected_market, selected_industry = render_sidebar()
+    # 페이지 라우팅
+    if choice == '홈 화면':
         run_home() 
-    elif choice == menu[1]:
-        run_detail()
-    elif choice == menu[2]:
-        pass
-
+    elif choice == '상권 개요':
+        run_overview()
+    elif choice == '시장 환경':
+        run_environment()
+    elif choice == '상권 전망':
+        run_forecast()
 
 if __name__ == '__main__':
     main()
