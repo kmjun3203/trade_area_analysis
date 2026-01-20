@@ -7,7 +7,17 @@ from folium import plugins
 
 
 def run_overview():
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+
     df_area = pd.read_csv('../data/서울시_상권분석서비스_좌표변환.csv')
+    df_road_population = pd.read_csv('../data/서울시 상권분석서비스(길단위인구-상권).csv', encoding='cp949')
+    df_resident_population = pd.read_csv('../data/서울시 상권분석서비스(상주인구-상권).csv', encoding='cp949')
+    df_worker_population = pd.read_csv('../data/서울시 상권분석서비스(직장인구-상권).csv', encoding='cp949')
+    df_store = pd.read_csv('../data/서울시 상권분석서비스(점포-상권).csv', encoding='cp949')
+    df_sales = pd.read_csv('../data/서울시 상권분석서비스(추정매출-상권).csv', encoding='cp949')
 
     # ✅ Session state에서 필터 정보 가져오기
     filters = st.session_state.get('filters', {})
@@ -22,6 +32,111 @@ def run_overview():
         df_area['상권_코드_명'] == selected_market,
         ['위도', '경도']
     ].iloc[0]
+
+    st.markdown("""
+        <div style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        ">
+            <h2 style="color: white; margin: 0; text-align: center;">
+                 선택한 상권 정보
+            </h2>
+            <p style="color: rgba(255,255,255,0.9); text-align: center; margin-top: 10px; font-size: 16px;">
+                 {market} | {gu} {dong}
+            </p>
+        </div>
+    """.format(market=selected_market, gu=selected_gu, dong=selected_dong), 
+    unsafe_allow_html=True)
+
+    cond_latest = df_road_population['기준_년분기_코드'] == df_road_population['기준_년분기_코드'].max()
+    cond_area   = df_road_population['상권_코드_명'] == selected_market
+    selected_road_population = df_road_population[cond_latest & cond_area]
+    selected_road_population = selected_road_population['총_유동인구_수'].iloc[0]
+    print(selected_road_population)
+
+    cond_latest_store = df_store['기준_년분기_코드'] == df_store['기준_년분기_코드'].max()
+    cond_area_store   = df_store['상권_코드_명'] == selected_market
+    selected_store = df_store[cond_latest_store & cond_area_store]
+    selected_store = df_store[cond_latest_store & cond_area_store]
+    total_store = selected_store['점포_수'].sum()
+    print(total_store)
+
+    cond_latest_sales = df_sales['기준_년분기_코드'] == df_sales['기준_년분기_코드'].max()
+    cond_area_sales   = df_sales['상권_코드_명'] == selected_market
+    selected_sales = df_sales[cond_latest_sales & cond_area_sales]
+    total_sales= selected_sales['당월_매출_금액'].sum()
+    print(total_sales)
+
+    def format_number(num):
+        if num >= 100000000:  # 1억 이상
+            return f"{num/100000000:.1f}억"
+        elif num >= 10000:  # 1만 이상
+            return f"{num/10000:.1f}만"
+        else:
+            return f"{num:,.0f}"
+        
+    st.markdown("""
+    <style>
+    .metric-card {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        border: 1px solid #e0e0e0;
+        text-align: center;
+        height: 100%;
+    }
+    .metric-label {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+        font-weight: 500;
+    }
+    .metric-value {
+        color: #1a1a1a;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-label">🚶 유동 인구 수</div>
+                <div class="metric-value">{format_number(selected_road_population)}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-label">🏪 점포 수</div>
+                <div class="metric-value">{format_number(total_store)}</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown(f"""
+            <div class="metric-card">
+                <div class="metric-label">💰 추정 총 매출</div>
+                <div class="metric-value">{format_number(total_sales)}원</div>
+            </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+
 
     # ===========================
     # 🗺 Folium 지도 시각화 (개선)
