@@ -13,14 +13,14 @@ DATA_DIR = Path(__file__).parent.parent.parent / "data"
 @st.cache_data
 def load_area_data():
     """영역 데이터 로드"""
-    filepath = DATA_DIR / "서울시 상권분석서비스(영역-상권).csv"
+    filepath = DATA_DIR / "서울시 상권분석서비스(영역-상권)_filtered.csv"
     return pd.read_csv(filepath, encoding='cp949')
 
 
 @st.cache_data
 def load_stores_data():
     """점포 데이터 로드"""
-    filepath = DATA_DIR / "서울시 상권분석서비스(점포-상권).csv"
+    filepath = DATA_DIR / "서울시 상권분석서비스(점포-상권)_filtered.csv"
     return pd.read_csv(filepath, encoding='cp949')
 
 
