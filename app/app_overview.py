@@ -12,6 +12,35 @@ def run_overview():
     st.write("")
     st.write("")
     st.write("")
+    st.title("상권 개요")
+    st.markdown("""
+        <hr style="
+            border: none;
+            border-top: 2px dashed #ccc;
+            margin: 20px 0;
+        ">
+    """, unsafe_allow_html=True)
+    st.subheader("선택한 상권의 기본 정보")
+    st.markdown("""
+        <div style="
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 30px;
+        ">
+            <p style="color: #495057; font-size: 15px; line-height: 1.7; margin: 0;">
+                <strong>이 페이지의 핵심 질문:</strong><br>
+                • 이 상권은 <span style="color: #667eea; font-weight: 600;">생활형</span>인가요, 
+                <span style="color: #764ba2; font-weight: 600;">업무 중심형</span>인가요?<br>
+                • <span style="color: #667eea; font-weight: 600;">언제</span> 사람이 가장 많이 몰리나요?
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")  
 
     df_area = pd.read_csv('../data/서울시_상권분석서비스_좌표변환_filtered.csv', encoding='cp949')
     df_road_population = pd.read_csv('../data/서울시 상권분석서비스(길단위인구-상권)_filtered.csv', encoding='cp949')
