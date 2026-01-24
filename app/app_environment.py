@@ -206,8 +206,10 @@ def run_environment():
     st.write("")
     st.write("")
     st.write("")
+    st.markdown("---")
     st.write("")
-
+    st.write("")
+    st.write("")
     st.markdown("---")
 
     # 상위 10개 업종 차트
@@ -343,11 +345,7 @@ def run_environment():
         use_container_width=True,
         height=400
     )
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-
+    
     
     competition_result = calc_competition_level(
         df_store=df_store,
@@ -356,7 +354,13 @@ def run_environment():
         selected_industry=selected_industry,
         latest_quarter=latest_quarter
     )
+    st.write("")
+    st.write("")
+    st.write("")
     st.markdown("---")
+    st.write("")
+    st.write("")
+    st.write("")
     if competition_result:
         st.markdown("""
             <div style="
@@ -478,12 +482,6 @@ def run_environment():
     st.write("")
     st.write("")
     st.write("")
-
-    
-
-   
-    
-
     st.write("")
     st.write("")
     st.write("")
