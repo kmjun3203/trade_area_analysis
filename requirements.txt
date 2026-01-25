@@ -7,7 +7,7 @@ numpy==1.26.3
 
 # Visualization
 plotly==5.18.0
-folium==0.15.1
+folium==0.14.0
 streamlit-folium==0.16.0
 
 # Geospatial
@@ -23,6 +23,3 @@ openai==1.10.0
 
 # Image Processing
 Pillow==10.2.0
-
-# Path handling (usually included in Python, but explicit for compatibility)
-pathlib2==2.3.7; python_version < '3.4'
