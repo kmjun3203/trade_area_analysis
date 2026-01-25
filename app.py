@@ -12,83 +12,80 @@ from app_forecast import run_forecast
 def main():
     # 최대 너비 및 사이드바 배경색 스타일
     st.markdown("""
-        <style>
-        /* 메인 컨테이너 최대 너비 변경 */
-        .block-container {
-            max-width: 1200px !important;
-            padding-top: 4.5rem;
-            padding-bottom: 2rem;
-        }
-        
-        /* 사이드바 배경색 */
-        [data-testid="stSidebar"] {
-            background-color: #e1e0df !important;
-        }
-        
-        /* 타이틀 컨테이너 스타일 */
-        .title-container {
-            background:
-                linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 248, 255, 0.92) 100%),
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(66, 133, 244, 0.03) 10px, rgba(66, 133, 244, 0.03) 20px),
-                repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(52, 168, 83, 0.03) 10px, rgba(52, 168, 83, 0.03) 20px);
-            background-color: #f0f8ff;
-            position: relative;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            border: 2px solid rgba(66, 133, 244, 0.2);
-            overflow: hidden;
-        }
-        .title-container::before {
-            content: '🍕🍔🍿🥐🌹🚲⛽🏢';
-            position: absolute;
-            top: 10px;
-            left: 0;
-            right: 0;
-            font-size: 40px;
-            opacity: 0.2;
-            letter-spacing: 30px;
-            pointer-events: none;
-        }
-        .title-container::after {
-            content: '♨️💈🏪🎉🎞️👔🛒👟';
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            font-size: 40px;
-            opacity: 0.2;
-            letter-spacing: 30px;
-            pointer-events: none;
-        }
-        .title-text {
-            font-size: 52px;
-            font-weight: bold;
-            margin: 0;
-            background: linear-gradient(135deg, #1a73e8 0%, #34a853 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
-        }
-        .subtitle-text {
-            font-size: 20px;
-            color: #5f6368;
-            margin-top: 15px;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-        </style>
+    <style>
+    /* 메인 컨테이너 최대 너비 변경 */
+    .block-container {
+        max-width: 1200px !important;
+        padding-top: 4.5rem;
+        padding-bottom: 2rem;
+    }
     
-        <div class="title-container">
-            <h1 class="title-text"><span style="filter: none; -webkit-text-fill-color: initial;">🗺️</span>장사잘될지도</h1>
-            <p class="subtitle-text">서울 상권 데이터 기반 입지 분석 & 창업 의사결정 플랫폼</p>
-        </div>
-    """, unsafe_allow_html=True)
+    /* 사이드바 배경색 */
+    [data-testid="stSidebar"] {
+        background-color: #e1e0df !important;
+    }
+    
+    /* 타이틀 컨테이너 스타일 */
+    .title-container {
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(240, 248, 255, 0.92) 100%),
+            repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(66, 133, 244, 0.03) 10px, rgba(66, 133, 244, 0.03) 20px),
+            repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(52, 168, 83, 0.03) 10px, rgba(52, 168, 83, 0.03) 20px);
+        background-color: #f0f8ff;
+        position: relative;
+        padding: 50px;
+        border-radius: 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        border: 2px solid rgba(66, 133, 244, 0.2);
+        overflow: hidden;
+    }
+    .title-container::before {
+        content: '🍕🍔🍿🥐🌹🚲⛽🏢';
+        position: absolute;
+        top: 10px;
+        left: 0;
+        right: 0;
+        font-size: 40px;
+        opacity: 0.2;
+        letter-spacing: 30px;
+        pointer-events: none;
+    }
+    .title-container::after {
+        content: '♨️💈🏪🎉🎞️👔🛒👟';
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        font-size: 40px;
+        opacity: 0.2;
+        letter-spacing: 30px;
+        pointer-events: none;
+    }
+    .title-text {
+        font-size: 52px;
+        font-weight: bold;
+        margin: 0;
+        color: #1a73e8;
+        position: relative;
+        z-index: 1;
+    }
+    .subtitle-text {
+        font-size: 20px;
+        color: #5f6368;
+        margin-top: 15px;
+        font-weight: 500;
+        position: relative;
+        z-index: 1;
+    }
+    </style>
+
+    <div class="title-container">
+        <h1 class="title-text">🗺️ 장사잘될지도</h1>
+        <p class="subtitle-text">서울 상권 데이터 기반 입지 분석 & 창업 의사결정 플랫폼</p>
+    </div>
+""", unsafe_allow_html=True)
 
     # 사이드바 렌더링
     choice, selected_gu, selected_dong, selected_market, selected_industry = render_sidebar()
