@@ -3,6 +3,31 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 import plotly.graph_objects as go
+import os 
+import platform  
+
+def set_korean_font():
+    """운영체제별 한글 폰트 설정"""
+    try:
+        system = platform.system()
+        
+        if system == 'Linux':  # Streamlit Cloud
+            font_path = '/usr/share/fonts/truetype/nanum/NanumGothic.ttf'
+            if os.path.exists(font_path):
+                font = fm.FontProperties(fname=font_path)
+                plt.rcParams["font.family"] = font.get_name()
+            else:
+                plt.rcParams["font.family"] = 'DejaVu Sans'
+        elif system == 'Windows':
+            plt.rcParams["font.family"] = 'Malgun Gothic'
+        elif system == 'Darwin':  # macOS
+            plt.rcParams["font.family"] = 'AppleGothic'
+        
+        plt.rcParams["axes.unicode_minus"] = False
+    except Exception as e:
+        print(f"Font setting error: {e}")
+        plt.rcParams["axes.unicode_minus"] = False
+
 
 def calc_competition_level(
     df_store: pd.DataFrame, df_area: pd.DataFrame, selected_market: str, selected_industry: str,latest_quarter: int
@@ -123,10 +148,12 @@ def run_environment():
     """.format(industry=selected_industry), unsafe_allow_html=True)
 
 
-    font_path = "C:/Windows/Fonts/malgun.ttf"  # 윈도우
-    font = fm.FontProperties(fname=font_path)
-    plt.rcParams["font.family"] = font.get_name()
-    plt.rcParams["axes.unicode_minus"] = False
+    # font_path = "C:/Windows/Fonts/malgun.ttf"  # 윈도우
+    # font = fm.FontProperties(fname=font_path)
+    # plt.rcParams["font.family"] = font.get_name()
+    # plt.rcParams["axes.unicode_minus"] = False
+
+    set_korean_font()
 
     df_store = pd.read_csv('./data/서울시 상권분석서비스(점포-상권)_filtered.csv', encoding='cp949')
     df_sales = pd.read_csv('./data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
