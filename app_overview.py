@@ -8,7 +8,8 @@ from streamlit_folium import st_folium
 from folium import plugins
 import geopandas as gpd
 from shapely.geometry import shape
-
+import os
+from pathlib import Path
 
 def run_overview():
     st.write("")
@@ -53,7 +54,8 @@ def run_overview():
     df_sales = pd.read_csv('./data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
     
     # ✅ Shapefile 로드
-    gdf_boundary = gpd.read_file('./data/서울시_상권분석서비스_영역-상권_.shp')
+    BASE_DIR = Path(__file__).parent
+    gdf_boundary = gpd.read_file(BASE_DIR / 'data' / '서울시_상권분석서비스_영역-상권_.shp')
     print(gdf_boundary.crs)
 
     # 🔁 folium용 WGS84(위·경도)로 변환
