@@ -11,8 +11,9 @@ matplotlib==3.8.2
 folium==0.14.0
 streamlit-folium==0.16.0
 
-# Geospatial
-fiona>=1.9.0
+# Geospatial - 버전 호환성 확보
+fiona==1.9.5
+pyproj==3.6.1
 geopandas==0.14.2
 shapely==2.0.2
 
