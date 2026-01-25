@@ -12,6 +12,7 @@ folium==0.14.0
 streamlit-folium==0.16.0
 
 # Geospatial
+fiona>=1.9.0
 geopandas==0.14.2
 shapely==2.0.2
 
