@@ -1,27 +1,28 @@
-# Core
-streamlit
+# Core Framework
+streamlit==1.31.0
 
-# Data
-pandas
-numpy
+# Data Processing
+pandas==2.1.4
+numpy==1.26.3
 
 # Visualization
-plotly
-folium
-streamlit-folium
+plotly==5.18.0
+folium==0.15.1
+streamlit-folium==0.16.0
 
 # Geospatial
-geopandas==0.14.1
-shapely
-pyproj
-fiona
+geopandas==0.14.2
+shapely==2.0.2
 
 # Machine Learning
-scikit-learn
-joblib
+scikit-learn==1.4.0
+joblib==1.3.2
 
-# AI / LLM
-openai
+# AI/LLM
+openai==1.10.0
 
-# Image
-Pillow
+# Image Processing
+Pillow==10.2.0
+
+# Path handling (usually included in Python, but explicit for compatibility)
+pathlib2==2.3.7; python_version < '3.4'
