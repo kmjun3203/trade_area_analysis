@@ -45,15 +45,15 @@ def run_overview():
     st.write("")
     st.write("")  
 
-    df_area = pd.read_csv('../data/서울시_상권분석서비스_좌표변환_filtered.csv', encoding='cp949')
-    df_road_population = pd.read_csv('../data/서울시 상권분석서비스(길단위인구-상권)_filtered.csv', encoding='cp949')
-    df_resident_population = pd.read_csv('../data/서울시 상권분석서비스(상주인구-상권)_filtered.csv', encoding='cp949')
-    df_worker_population = pd.read_csv('../data/서울시 상권분석서비스(직장인구-상권)_filtered.csv', encoding='cp949')
-    df_store = pd.read_csv('../data/서울시 상권분석서비스(점포-상권)_filtered.csv', encoding='cp949')
-    df_sales = pd.read_csv('../data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
+    df_area = pd.read_csv('./data/서울시_상권분석서비스_좌표변환_filtered.csv', encoding='cp949')
+    df_road_population = pd.read_csv('./data/서울시 상권분석서비스(길단위인구-상권)_filtered.csv', encoding='cp949')
+    df_resident_population = pd.read_csv('./data/서울시 상권분석서비스(상주인구-상권)_filtered.csv', encoding='cp949')
+    df_worker_population = pd.read_csv('./data/서울시 상권분석서비스(직장인구-상권)_filtered.csv', encoding='cp949')
+    df_store = pd.read_csv('./data/서울시 상권분석서비스(점포-상권)_filtered.csv', encoding='cp949')
+    df_sales = pd.read_csv('./data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
     
     # ✅ Shapefile 로드
-    gdf_boundary = gpd.read_file('../data/서울시_상권분석서비스_영역-상권_.shp')
+    gdf_boundary = gpd.read_file('./data/서울시_상권분석서비스_영역-상권_.shp')
     print(gdf_boundary.crs)
 
     # 🔁 folium용 WGS84(위·경도)로 변환
@@ -427,6 +427,21 @@ def run_overview():
                 </p>
             </div>
         """, unsafe_allow_html=True)
+
+    # 안내 멘트 추가
+    st.markdown("""
+        <div style="
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-top: 20px;
+        ">
+            <p style="color: #856404; font-size: 13px; margin: 0; line-height: 1.6;">
+                ℹ️ <strong>안내:</strong> 표시되는 상권은 행정동과 범위가 달라, 인구가 작게 보이더라도 실제 이용 규모와는 차이가 있을 수 있습니다.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
 
     st.write("")
     st.write("")

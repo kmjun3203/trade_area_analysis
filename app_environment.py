@@ -128,11 +128,11 @@ def run_environment():
     plt.rcParams["font.family"] = font.get_name()
     plt.rcParams["axes.unicode_minus"] = False
 
-    df_store = pd.read_csv('../data/서울시 상권분석서비스(점포-상권)_filtered.csv', encoding='cp949')
-    df_sales = pd.read_csv('../data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
-    df_facilities = pd.read_csv('../data/서울시 상권분석서비스(집객시설-상권)_filtered.csv', encoding='cp949')
-    df_income = pd.read_csv('../data/서울시 상권분석서비스(소득소비-상권)_filtered.csv', encoding='cp949')
-    df_area = pd.read_csv('../data/서울시 상권분석서비스(영역-상권)_filtered.csv', encoding='cp949')
+    df_store = pd.read_csv('./data/서울시 상권분석서비스(점포-상권)_filtered.csv', encoding='cp949')
+    df_sales = pd.read_csv('./data/서울시 상권분석서비스(추정매출-상권)_filtered.csv', encoding='cp949')
+    df_facilities = pd.read_csv('./data/서울시 상권분석서비스(집객시설-상권)_filtered.csv', encoding='cp949')
+    df_income = pd.read_csv('./data/서울시 상권분석서비스(소득소비-상권)_filtered.csv', encoding='cp949')
+    df_area = pd.read_csv('./data/서울시 상권분석서비스(영역-상권)_filtered.csv', encoding='cp949')
 
     latest_quarter = df_store['기준_년분기_코드'].max()
 

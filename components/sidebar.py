@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 # 데이터 디렉토리 경로
-DATA_DIR = Path(__file__).parent.parent.parent / "data"
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 
 @st.cache_data
@@ -70,9 +70,6 @@ def render_sidebar():
         
         st.divider()
 
-        # 빈 공간
-        for _ in range(15):
-            st.write("")
         
         # 로고 이미지
         img_path = os.path.join("static", "images", "logo.png")
@@ -83,10 +80,6 @@ def render_sidebar():
             
             st.markdown(f"""
                 <div style="text-align: center; margin: 20px 0;">
-                    <img src="data:image/png;base64,{data}" 
-                        style="width: 300px;
-                                border-radius: 15px; 
-                                margin-bottom: 10px;">
                     <div style="font-size: 20px; 
                                 font-weight: bold; 
                                 color: #565a62;

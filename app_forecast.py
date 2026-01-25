@@ -10,7 +10,7 @@ from pathlib import Path
 # -----------------------------
 @st.cache_resource
 def load_models():
-    models_dir = Path("../data/models")  # ✅ 여기로 변경
+    models_dir = Path("./data/models")  # ✅ 여기로 변경
     pipe_sales = joblib.load(models_dir / "model_sales_direction.pkl")
     pipe_satu  = joblib.load(models_dir / "model_saturation.pkl")
     pipe_change = joblib.load(models_dir / "model_change_state.pkl")
@@ -23,8 +23,8 @@ def load_models():
 # -----------------------------
 @st.cache_data
 def load_data():
-    df_sales = pd.read_csv("../data/서울시 상권분석서비스(추정매출-상권)_filtered.csv", encoding="cp949")
-    df_store = pd.read_csv("../data/서울시 상권분석서비스(점포-상권)_filtered.csv", encoding="cp949")
+    df_sales = pd.read_csv("./data/서울시 상권분석서비스(추정매출-상권)_filtered.csv", encoding="cp949")
+    df_store = pd.read_csv("./data/서울시 상권분석서비스(점포-상권)_filtered.csv", encoding="cp949")
     return df_sales, df_store
 
 
@@ -108,7 +108,7 @@ def make_trend_chart(df, x_col, y_col, title, y_label):
     ))
     fig.update_layout(
         title={"text": title, "x": 0.5, "xanchor": "center"},
-        xaxis_title="기준_년분기_코드",
+        xaxis_title="기준 년 분기 코드",
         yaxis_title=y_label,
         height=360,
         margin=dict(l=40, r=40, t=60, b=40),
