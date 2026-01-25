@@ -7,6 +7,7 @@ numpy==1.26.3
 
 # Visualization
 plotly==5.18.0
+matplotlib==3.8.2
 folium==0.14.0
 streamlit-folium==0.16.0
 
