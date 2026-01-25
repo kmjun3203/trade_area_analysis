@@ -1,27 +1,27 @@
 # Core
-streamlit>=1.31
+streamlit
 
 # Data
-pandas>=2.1
-numpy>=1.26
+pandas
+numpy
 
 # Visualization
-plotly>=5.18
-folium>=0.15
-streamlit-folium>=0.16
+plotly
+folium
+streamlit-folium
 
 # Geospatial
-geopandas>=0.14
-shapely>=2.0
-pyproj>=3.6
-fiona>=1.9
+geopandas
+shapely
+pyproj
+fiona
 
 # Machine Learning
-scikit-learn>=1.4
-joblib>=1.3
+scikit-learn
+joblib
 
 # AI / LLM
-openai>=1.10
+openai
 
 # Image
-Pillow>=10.2
+Pillow
